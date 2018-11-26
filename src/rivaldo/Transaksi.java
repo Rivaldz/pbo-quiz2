@@ -1,8 +1,13 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package rivaldo;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -15,8 +20,10 @@ public class Transaksi extends javax.swing.JFrame {
 	 */
 	public Transaksi() {
 		initComponents();
-		
+
 	}
+		
+	
 
 	/**
 	 * This method is called from within the constructor to initialize the
@@ -34,8 +41,6 @@ public class Transaksi extends javax.swing.JFrame {
                 itemComboBox = new javax.swing.JComboBox<>();
                 itemValue = new javax.swing.JTextField();
                 addButton = new javax.swing.JButton();
-                jScrollPane1 = new javax.swing.JScrollPane();
-                jTable1 = new javax.swing.JTable();
                 removeTitle = new javax.swing.JButton();
                 SaveButton = new javax.swing.JButton();
                 CancelButton = new javax.swing.JButton();
@@ -63,25 +68,6 @@ public class Transaksi extends javax.swing.JFrame {
 
                 addButton.setText("Add");
 
-                jTable1.setModel(new javax.swing.table.DefaultTableModel(
-                        new Object [][] {
-                                {null, null, null},
-                                {null, null, null},
-                                {null, null, null},
-                                {null, null, null}
-                        },
-                        new String [] {
-                                "Title 1", "Title 2", "Title 3"
-                        }
-                ));
-                jScrollPane1.setViewportView(jTable1);
-                if (jTable1.getColumnModel().getColumnCount() > 0) {
-                        jTable1.getColumnModel().getColumn(0).setHeaderValue("Title 1");
-                        jTable1.getColumnModel().getColumn(1).setHeaderValue("Title 2");
-                        jTable1.getColumnModel().getColumn(2).setHeaderValue("Title 3");
-                        jTable1.getColumnModel().getColumn(3).setResizable(false);
-                }
-
                 removeTitle.setText("Remove");
 
                 SaveButton.setText("Save");
@@ -104,7 +90,6 @@ public class Transaksi extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                                                 .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(176, 176, 176))
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                                 .addComponent(itemComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
@@ -132,10 +117,8 @@ public class Transaksi extends javax.swing.JFrame {
                                         .addComponent(itemValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(addButton))
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(removeTitle))
-                                .addGap(50, 50, 50)
+                                .addComponent(removeTitle)
+                                .addGap(177, 177, 177)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(SaveButton)
                                         .addComponent(CancelButton))
@@ -152,6 +135,15 @@ public class Transaksi extends javax.swing.JFrame {
 
         private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
                 // TODO add your handling code here:
+		
+		Date date = new Date();
+		SimpleDateFormat date1 = new SimpleDateFormat("yyMMdd");
+		String tanggal = date1.format(date.getTime());
+		codeValue.setText(tanggal);
+		
+		
+		
+		
 		
         }//GEN-LAST:event_newButtonActionPerformed
 
@@ -199,8 +191,6 @@ public class Transaksi extends javax.swing.JFrame {
         private javax.swing.JTextField itemValue;
         private javax.swing.JLabel jLabel1;
         private javax.swing.JLabel jLabel2;
-        private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JTable jTable1;
         private javax.swing.JButton newButton;
         private javax.swing.JButton removeTitle;
         // End of variables declaration//GEN-END:variables
