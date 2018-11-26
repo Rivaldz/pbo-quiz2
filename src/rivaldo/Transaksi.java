@@ -15,7 +15,7 @@ import java.util.Date;
  */
 public class Transaksi extends javax.swing.JFrame {
 	Item barang;
-	ItemPenjualan penjualan=new ItemPenjualan();
+	ItemPenjualan penjualan = new ItemPenjualan();
 	/**
 	 * Creates new form Transaksi
 	 */
@@ -86,7 +86,18 @@ public class Transaksi extends javax.swing.JFrame {
                         }
                 });
 
+                itemValue.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                itemValueActionPerformed(evt);
+                        }
+                });
+
                 addButton.setText("Add");
+                addButton.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                addButtonActionPerformed(evt);
+                        }
+                });
 
                 removeTitle.setText("Remove");
 
@@ -185,7 +196,31 @@ public class Transaksi extends javax.swing.JFrame {
 
         private void itemComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComboBoxActionPerformed
                 // TODO add your handling code here:
+		barang = (Item)itemComboBox.getSelectedItem();
         }//GEN-LAST:event_itemComboBoxActionPerformed
+
+        private void itemValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemValueActionPerformed
+                // TODO add your handling code here:
+        }//GEN-LAST:event_itemValueActionPerformed
+
+        private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+                // TODO add your handling code here:
+	String[] data = new String[3];
+        double harga, jumlah=0;
+        int qty=0;
+        
+        data[0]=barang.getNamaBarang();
+//        harga=barang.getHarga();
+        data[1]=String.valueOf(barang.getHarga());
+//        qty=Integer.parseInt(itemValue.getText());
+        data[2]=itemValue.getText();
+        
+        penjualan.getTabel().addRow(data);
+//        lblSubtotal.setText(NumberFormat.getNumberInstance().format(penjualan.countSubtotal()));
+//        chkPPNActionPerformed(null);
+        
+        itemComboBox.requestFocus();
+        }//GEN-LAST:event_addButtonActionPerformed
 
 	/**
 	 * @param args the command line arguments
