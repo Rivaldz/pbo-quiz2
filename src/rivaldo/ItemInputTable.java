@@ -16,7 +16,8 @@ public class ItemInputTable {
 	 */
 	public static void main(String[] args) {
 		// TODO code application logic here
-		
+		Transaksi transaksi = new Transaksi();
+		transaksi.setVisible(true);
 	}
 	
 }
