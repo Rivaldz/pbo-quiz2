@@ -28,7 +28,12 @@ public class Transaksi extends javax.swing.JFrame {
 	
     private void fillComboBarang(){
 	Item item1 = new Item("Susu", 10000);
+	Item item2 = new Item("Kopi", 11000);
+	Item item3 = new Item("Gula", 12000);
 		
+	itemComboBox.addItem(item1);
+	itemComboBox.addItem(item2);
+	itemComboBox.addItem(item3);
     }
 		
 	
@@ -46,7 +51,7 @@ public class Transaksi extends javax.swing.JFrame {
                 jLabel2 = new javax.swing.JLabel();
                 codeValue = new javax.swing.JTextField();
                 newButton = new javax.swing.JButton();
-                itemComboBox = new javax.swing.JComboBox<>();
+                itemComboBox = new javax.swing.JComboBox();
                 itemValue = new javax.swing.JTextField();
                 addButton = new javax.swing.JButton();
                 removeTitle = new javax.swing.JButton();
@@ -75,7 +80,11 @@ public class Transaksi extends javax.swing.JFrame {
                         }
                 });
 
-                itemComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kopi", "Susu", "Gula" }));
+                itemComboBox.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                itemComboBoxActionPerformed(evt);
+                        }
+                });
 
                 addButton.setText("Add");
 
@@ -174,6 +183,10 @@ public class Transaksi extends javax.swing.JFrame {
 		
         }//GEN-LAST:event_newButtonActionPerformed
 
+        private void itemComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComboBoxActionPerformed
+                // TODO add your handling code here:
+        }//GEN-LAST:event_itemComboBoxActionPerformed
+
 	/**
 	 * @param args the command line arguments
 	 */
@@ -214,7 +227,7 @@ public class Transaksi extends javax.swing.JFrame {
         private javax.swing.JButton SaveButton;
         private javax.swing.JButton addButton;
         private javax.swing.JTextField codeValue;
-        private javax.swing.JComboBox<String> itemComboBox;
+        private javax.swing.JComboBox itemComboBox;
         private javax.swing.JTextField itemValue;
         private javax.swing.JLabel jLabel1;
         private javax.swing.JLabel jLabel2;
