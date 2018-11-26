@@ -14,15 +14,22 @@ import java.util.Date;
  * @author rivaldz
  */
 public class Transaksi extends javax.swing.JFrame {
-
+	Item barang;
+	ItemPenjualan penjualan=new ItemPenjualan();
 	/**
 	 * Creates new form Transaksi
 	 */
 	public Transaksi() {
 		initComponents();
+		fillComboBarang();
+		tblBarang.setModel(penjualan.getTabel());
 
 	}
 	
+    private void fillComboBarang(){
+	Item item1 = new Item("Susu", 10000);
+		
+    }
 		
 	
 
@@ -46,7 +53,7 @@ public class Transaksi extends javax.swing.JFrame {
                 SaveButton = new javax.swing.JButton();
                 CancelButton = new javax.swing.JButton();
                 jScrollPane1 = new javax.swing.JScrollPane();
-                jTable1 = new javax.swing.JTable();
+                tblBarang = new javax.swing.JTable();
 
                 setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
                 setTitle("Transaksi");
@@ -78,18 +85,18 @@ public class Transaksi extends javax.swing.JFrame {
 
                 CancelButton.setText("Cancel");
 
-                jTable1.setModel(new javax.swing.table.DefaultTableModel(
+                tblBarang.setModel(new javax.swing.table.DefaultTableModel(
                         new Object [][] {
-                                {null, null, null, null},
-                                {null, null, null, null},
-                                {null, null, null, null},
-                                {null, null, null, null}
+                                {null, null, null},
+                                {null, null, null},
+                                {null, null, null},
+                                {null, null, null}
                         },
                         new String [] {
-                                "Title 1", "Title 2", "Title 3", "Title 4"
+                                "Title 1", "Title 2", "Title 3"
                         }
                 ));
-                jScrollPane1.setViewportView(jTable1);
+                jScrollPane1.setViewportView(tblBarang);
 
                 javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
                 getContentPane().setLayout(layout);
@@ -212,8 +219,8 @@ public class Transaksi extends javax.swing.JFrame {
         private javax.swing.JLabel jLabel1;
         private javax.swing.JLabel jLabel2;
         private javax.swing.JScrollPane jScrollPane1;
-        private javax.swing.JTable jTable1;
         private javax.swing.JButton newButton;
         private javax.swing.JButton removeTitle;
+        private javax.swing.JTable tblBarang;
         // End of variables declaration//GEN-END:variables
 }
