@@ -8,6 +8,7 @@ package rivaldo;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -107,6 +108,11 @@ public class Transaksi extends javax.swing.JFrame {
                 });
 
                 SaveButton.setText("Save");
+                SaveButton.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                SaveButtonActionPerformed(evt);
+                        }
+                });
 
                 CancelButton.setText("Cancel");
 
@@ -212,14 +218,13 @@ public class Transaksi extends javax.swing.JFrame {
         int qty=0;
         
         data[0]=barang.getNamaBarang();
-//        harga=barang.getHarga();
+
         data[1]=String.valueOf(barang.getHarga());
-//        qty=Integer.parseInt(itemValue.getText());
+
         data[2]=itemValue.getText();
         
         penjualan.getTabel().addRow(data);
-//        lblSubtotal.setText(NumberFormat.getNumberInstance().format(penjualan.countSubtotal()));
-//        chkPPNActionPerformed(null);
+
         
         itemComboBox.requestFocus();
         }//GEN-LAST:event_addButtonActionPerformed
@@ -229,6 +234,16 @@ public class Transaksi extends javax.swing.JFrame {
 		penjualan.getTabel().removeRow(tblBarang.getSelectedRow());
 		
         }//GEN-LAST:event_removeTitleActionPerformed
+
+        private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+                // TODO add your handling code he
+		double harga, jumlah = 0 ;
+		int qty = 0 ;
+		
+		harga = barang.getHarga();
+		qty = Integer.parseInt(itemValue.getText());		
+		JOptionPane.showMessageDialog(null, "Kode : " + codeValue.getText() + "\n" + "Daftar Belanja: \n" +barang.getNamaBarang()+ qty + " " + harga + "\n" + "Total " +penjualan.countSubtotal());
+        }//GEN-LAST:event_SaveButtonActionPerformed
 
 	/**
 	 * @param args the command line arguments
