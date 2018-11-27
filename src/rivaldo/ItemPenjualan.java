@@ -13,13 +13,19 @@ public class ItemPenjualan {
 	private DefaultTableModel tabel = new DefaultTableModel();
 	
 	public ItemPenjualan() {
-	getTabel().addColumn("Barang");
+	getTabel().addColumn("Nama");
         getTabel().addColumn("Harga");
-        getTabel().addColumn("Qty");
-        getTabel().addColumn("Satuan");
         getTabel().addColumn("Jumlah");
+        
 	
 	}
+	public double countSubtotal(){
+        double subTotal=0;
+        for (int i=0;i<tabel.getRowCount();i++){
+            subTotal=subTotal+Double.parseDouble(tabel.getValueAt(i, 1).toString());
+        }
+        return subTotal;
+    }
 
 	public String getNama() {
 		return nama;
