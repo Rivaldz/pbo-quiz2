@@ -21,11 +21,22 @@ public class ItemPenjualan {
 	}
 	public double countSubtotal(){
         double subTotal=0;
-        for (int i=0;i<tabel.getRowCount();i++){
-            subTotal=subTotal+Double.parseDouble(tabel.getValueAt(i, 1).toString());
+	double penghitungan = 0;
+        for (int i=0 ; i < tabel.getRowCount();i++){
+	    penghitungan = Double.parseDouble((String) tabel.getValueAt(i, 2));
+            subTotal = subTotal + (penghitungan*Double.parseDouble(tabel.getValueAt(i, 1).toString()));
         }
         return subTotal;
     }
+	public String countName(){
+	   String subTotal;
+	   String penghitungan = "\n";
+	   for (int i=0 ; i < tabel.getRowCount();i++){
+	    penghitungan = (String) tabel.getValueAt(i, 0);
+            
+           }
+	   return  penghitungan;
+	}
 
 	public String getNama() {
 		return nama;
