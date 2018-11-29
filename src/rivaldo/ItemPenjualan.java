@@ -29,13 +29,15 @@ public class ItemPenjualan {
         return subTotal;
     }
 	public String countName(){
-	   String subTotal;
-	   String penghitungan = "\n";
-	   for (int i=0 ; i < tabel.getRowCount();i++){
-	    penghitungan = (String) tabel.getValueAt(i, 0);
-            
-           }
-	   return  penghitungan;
+		countSubtotal();
+		String str = "";
+		str += "Kode\t\t: "+ this.code +"\n";
+		str += "Daftar Belanja : \n";
+		for(Item item : ) {
+		str += "\t"+ item.getName() +"(x"+ item.getQty() +") : "+ item.getTotal() +"\n";
+        }
+        str += "Total\t\t: "+ this.total;
+        return str;
 	}
 
 	public String getNama() {
