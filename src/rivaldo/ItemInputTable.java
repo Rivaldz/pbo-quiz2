@@ -9,15 +9,15 @@ package rivaldo;
  *
  * @author rivaldz
  */
-public class ItemInputTable {
-
-	/**
-	 * @param args the command line arguments
-	 */
-	public static void main(String[] args) {
-		// TODO code application logic here
-		Transaksi transaksi = new Transaksi();
-		transaksi.setVisible(true);
-	}
-	
-}
+//public class ItemInputTable {
+//
+//	/**
+//	 * @param args the command line arguments
+//	 */
+//	public static void main(String[] args) {
+//		// TODO code application logic here
+//		Transaksi transaksi = new Transaksi(); 
+//		transaksi.setVisible(true);
+//	}
+//	
+//}
