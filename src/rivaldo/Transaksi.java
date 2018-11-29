@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.xml.crypto.Data;
 
 /**
  *
@@ -19,19 +20,19 @@ import javax.swing.table.DefaultTableModel;
 public class Transaksi extends javax.swing.JFrame {
 	int i = 0;
 	Item barang;
-	ItemPenjualan penjualan = new ItemPenjualan();
-	private DefaultTableModel tabel = new DefaultTableModel();
+	ItemPenjualan penjualan = new ItemPenjualan(); //objek class ItemPenjualan 
+	private DefaultTableModel tabel = new DefaultTableModel(); //memanggil method default table 
 	boolean enable = true;
 	/**
 	 * Creates new form Transaksi
 	 */
 	public Transaksi() {
 		initComponents();
-		fillComboBarang();
+		fillComboBarang(); //pemanggilan method untuk menjalankan perintah jComboBox 
 		tblBarang.setModel(penjualan.getTabel());
 		buttonTogle();
 	}
-	private void buttonTogle(){
+	private void buttonTogle(){ //method untuk disable enable ui java
 		addButton.setEnabled(false);
 		itemComboBox.setEnabled(false);
 		itemValue.setEnabled(false);
@@ -39,10 +40,10 @@ public class Transaksi extends javax.swing.JFrame {
 		tblBarang.setEnabled(false);
 		SaveButton.setEnabled(false);
 		CancelButton.setEnabled(false);
-		codeValue.setEnabled(false);
+		codeValue.setEnabled(enable);
 	}
 	
-    private void fillComboBarang(){
+    private void fillComboBarang(){ //method untuk mengisi jComboBox
 	Item item1 = new Item("Susu", 10000);
 	Item item2 = new Item("Kopi", 11000);
 	Item item3 = new Item("Gula", 12000);
@@ -175,7 +176,7 @@ public class Transaksi extends javax.swing.JFrame {
                                                         .addGap(97, 97, 97)
                                                         .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
                                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(newButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(addButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -185,7 +186,7 @@ public class Transaksi extends javax.swing.JFrame {
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(29, Short.MAX_VALUE)
+                                .addContainerGap(25, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel1)
                                         .addComponent(codeValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,11 +201,11 @@ public class Transaksi extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(removeTitle)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(45, 45, 45)
+                                .addGap(33, 33, 33)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(CancelButton)
                                         .addComponent(SaveButton))
-                                .addGap(21, 21, 21))
+                                .addGap(33, 33, 33))
                 );
 
                 pack();
@@ -218,12 +219,12 @@ public class Transaksi extends javax.swing.JFrame {
         private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
 
                 // TODO add your handling code here:
-		if (newButton.getText().equals("New")) {
+		if (newButton.getText().equals("New")) {//apabila di tekan new maka button di bawahnya akan muncul 
 			addButton.setEnabled(enable);
-			codeValue.setEnabled(enable);			
+			codeValue.setEnabled(false);			
 			itemComboBox.setEnabled(enable);
 			itemValue.setEnabled(enable);
-			
+			newButton.setEnabled(false);
 		}
 		
 		i++;
@@ -236,7 +237,7 @@ public class Transaksi extends javax.swing.JFrame {
 
         private void itemComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemComboBoxActionPerformed
                 // TODO add your handling code here:
-		barang = (Item)itemComboBox.getSelectedItem();
+		barang = (Item)itemComboBox.getSelectedItem();//memanggil item di tampilkan di combo box
         }//GEN-LAST:event_itemComboBoxActionPerformed
 
         private void itemValueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemValueActionPerformed
@@ -244,30 +245,34 @@ public class Transaksi extends javax.swing.JFrame {
         }//GEN-LAST:event_itemValueActionPerformed
 
         private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-                // TODO add your handling code here:	
-	removeTitle.setEnabled(enable);
-	tblBarang.setEnabled(enable);
-	SaveButton.setEnabled(enable);
-	CancelButton.setEnabled(enable);	
-	String[] data = new String[3];
-        double harga, jumlah=0;
-        int qty=0;		
-
-        data[0]=barang.getNamaBarang();
-//
-        data[1]=String.valueOf(barang.getHarga());
-
-        data[2]=itemValue.getText();
+                // TODO add your handling code here;
+		
+		String isi = itemValue.getText();//memanggil text yang ada di kolom itemvalue
+		if (isi.equals("")) {//cek apakah kolom sudah terisi 
+			JOptionPane.showMessageDialog(null, "masukan jumlah di kolom kiri Add","Mohon Perhatian", JOptionPane.WARNING_MESSAGE);
+		} else { 
+		
+			removeTitle.setEnabled(enable);
+			tblBarang.setEnabled(enable);
+			SaveButton.setEnabled(enable);
+			CancelButton.setEnabled(enable);
+			
+			DefaultTableModel model =(DefaultTableModel)tblBarang.getModel();
+			
+			String[] data = new String[3];			
+			data[0]=barang.getNamaBarang();	//memasukan nama barang dari class item ke indek table 
+			data[1]=String.valueOf(barang.getHarga()); //memasukan harga barang dari class item ke indek table 
+			data[2]=itemValue.getText(); //memasukan jumlah item  dari class item ke indek table 
+			penjualan.getTabel().addRow(data); //memasukan semua index data ke table row 
+			
+		}
         
-        penjualan.getTabel().addRow(data);
-
-        
-        //itemComboBox.requestFocus();
         }//GEN-LAST:event_addButtonActionPerformed
 
         private void removeTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeTitleActionPerformed
                 // TODO add your handling code here:
-		penjualan.getTabel().removeRow(tblBarang.getSelectedRow());
+		
+		penjualan.getTabel().removeRow(tblBarang.getSelectedRow()); //mengahapus data yang dipilih user 
 		
         }//GEN-LAST:event_removeTitleActionPerformed
 
@@ -276,18 +281,37 @@ public class Transaksi extends javax.swing.JFrame {
 		double harga, jumlah = 0 ;
 		int qty = 0 ;
 		
-		harga = barang.getHarga();
+		harga = barang.getHarga();  //menampilkan dan memanggil method perhitungan dan tampilan nama dari class itempenjualan 
 		qty = Integer.parseInt(itemValue.getText());		
-		JOptionPane.showMessageDialog(null, "Kode : " + codeValue.getText() + "\n" + "Daftar Belanja: \n" + penjualan.countName()+ " " + "\n" + "Total " +penjualan.countSubtotal());
+		JOptionPane.showMessageDialog(null, "Kode : " + codeValue.getText() + "\n" + "Daftar Belanja: \n" + "Nama Barang " +penjualan.showSave() + "\n" + "Total " +penjualan.countSubtotal());
+		DefaultTableModel model =(DefaultTableModel)tblBarang.getModel();
+		while (model.getRowCount() > 0) { //me set ulang tabel ke kosong setelah di save 
+			for (int j = 0; j < model.getRowCount(); j++) {
+				model.removeRow(j);
+			}
+		}
+		//codeValue.setText(null);
+		itemValue.setText(null);
+		addButton.setEnabled(false);
+		codeValue.setEnabled(false);			
+		itemComboBox.setEnabled(false);
+		itemValue.setEnabled(false);
+		newButton.setEnabled(enable);
+		codeValue.setEnabled(enable);
         }//GEN-LAST:event_SaveButtonActionPerformed
 
         private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
                 // TODO add your handling code here:
+		DefaultTableModel model =(DefaultTableModel)tblBarang.getModel();
 		
+		while (model.getRowCount() > 0) { //mengkosongkan tabel apabila user clik cancel 
+			for (int j = 0; j < model.getRowCount(); j++) {
+				model.removeRow(j);
+			}
+		}
+		//codeValue.setText(null);
+		itemValue.setText(null); //mengkosongkan isi masukan jumlah item yang di masukan oleh user 
 		
-		codeValue.setText(null);
-		itemValue.setText(null);
-		tabel.setRowCount(0);
         }//GEN-LAST:event_CancelButtonActionPerformed
 
 	/**
