@@ -6,17 +6,22 @@
  */
 package rivaldo;
 
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author rivaldz
  */
 public class Transaksi extends javax.swing.JFrame {
+	int i = 0;
 	Item barang;
 	ItemPenjualan penjualan = new ItemPenjualan();
+	private DefaultTableModel tabel = new DefaultTableModel();
+	boolean enable = true;
 	/**
 	 * Creates new form Transaksi
 	 */
@@ -24,17 +29,29 @@ public class Transaksi extends javax.swing.JFrame {
 		initComponents();
 		fillComboBarang();
 		tblBarang.setModel(penjualan.getTabel());
-
+		buttonTogle();
+	}
+	private void buttonTogle(){
+		addButton.setEnabled(false);
+		itemComboBox.setEnabled(false);
+		itemValue.setEnabled(false);
+		removeTitle.setEnabled(false);
+		tblBarang.setEnabled(false);
+		SaveButton.setEnabled(false);
+		CancelButton.setEnabled(false);
+		codeValue.setEnabled(false);
 	}
 	
     private void fillComboBarang(){
 	Item item1 = new Item("Susu", 10000);
 	Item item2 = new Item("Kopi", 11000);
 	Item item3 = new Item("Gula", 12000);
+	//Item item4 = new Item("Gula", 12000);
 		
 	itemComboBox.addItem(item1);
 	itemComboBox.addItem(item2);
 	itemComboBox.addItem(item3);
+	//itemComboBox.addItem(item4);
     }
 		
 	
@@ -115,6 +132,11 @@ public class Transaksi extends javax.swing.JFrame {
                 });
 
                 CancelButton.setText("Cancel");
+                CancelButton.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent evt) {
+                                CancelButtonActionPerformed(evt);
+                        }
+                });
 
                 tblBarang.setModel(new javax.swing.table.DefaultTableModel(
                         new Object [][] {
@@ -124,7 +146,7 @@ public class Transaksi extends javax.swing.JFrame {
                                 {null, null, null}
                         },
                         new String [] {
-                                "Title 1", "Title 2", "Title 3"
+                                "Nama", "Harga", "Jumlah"
                         }
                 ));
                 jScrollPane1.setViewportView(tblBarang);
@@ -135,25 +157,25 @@ public class Transaksi extends javax.swing.JFrame {
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(107, 107, 107)
-                                                .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGap(46, 46, 46)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                                                .addComponent(itemComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(itemValue, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
+                                                        .addComponent(codeValue, javax.swing.GroupLayout.Alignment.LEADING)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addGroup(layout.createSequentialGroup()
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addComponent(jLabel1)
-                                                                .addComponent(jLabel2))
-                                                        .addGap(46, 46, 46)
-                                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                                        .addComponent(itemComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                                        .addGap(18, 18, 18)
-                                                                        .addComponent(itemValue, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
-                                                                .addComponent(codeValue, javax.swing.GroupLayout.Alignment.LEADING)))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                                                        .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGap(97, 97, 97)
+                                                        .addComponent(CancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(newButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(addButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -163,7 +185,7 @@ public class Transaksi extends javax.swing.JFrame {
                 layout.setVerticalGroup(
                         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(29, 29, 29)
+                                .addContainerGap(29, Short.MAX_VALUE)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel1)
                                         .addComponent(codeValue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -178,11 +200,11 @@ public class Transaksi extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(removeTitle)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(66, 66, 66)
+                                .addGap(45, 45, 45)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(SaveButton)
-                                        .addComponent(CancelButton))
-                                .addContainerGap(20, Short.MAX_VALUE))
+                                        .addComponent(CancelButton)
+                                        .addComponent(SaveButton))
+                                .addGap(21, 21, 21))
                 );
 
                 pack();
@@ -194,11 +216,21 @@ public class Transaksi extends javax.swing.JFrame {
         }//GEN-LAST:event_codeValueActionPerformed
 
         private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-                // TODO add your handling code here:		
+
+                // TODO add your handling code here:
+		if (newButton.getText().equals("New")) {
+			addButton.setEnabled(enable);
+			codeValue.setEnabled(enable);			
+			itemComboBox.setEnabled(enable);
+			itemValue.setEnabled(enable);
+			
+		}
+		
+		i++;
 		Date date = new Date(); //instansiasi object untuk date
 		SimpleDateFormat date1 = new SimpleDateFormat("yyMMdd"); //memanggil tanggal dari object (menentukan format)
 		String tanggal = date1.format(date.getTime());//memanggil tanggal dengan format yang telah di buat 
-		codeValue.setText(tanggal);//me set ke gui 
+		codeValue.setText(tanggal + String.format("%02d",i));//me set ke gui 
 		
         }//GEN-LAST:event_newButtonActionPerformed
 
@@ -212,13 +244,17 @@ public class Transaksi extends javax.swing.JFrame {
         }//GEN-LAST:event_itemValueActionPerformed
 
         private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
-                // TODO add your handling code here:
+                // TODO add your handling code here:	
+	removeTitle.setEnabled(enable);
+	tblBarang.setEnabled(enable);
+	SaveButton.setEnabled(enable);
+	CancelButton.setEnabled(enable);	
 	String[] data = new String[3];
         double harga, jumlah=0;
-        int qty=0;
-        
-        data[0]=barang.getNamaBarang();
+        int qty=0;		
 
+        data[0]=barang.getNamaBarang();
+//
         data[1]=String.valueOf(barang.getHarga());
 
         data[2]=itemValue.getText();
@@ -226,7 +262,7 @@ public class Transaksi extends javax.swing.JFrame {
         penjualan.getTabel().addRow(data);
 
         
-        itemComboBox.requestFocus();
+        //itemComboBox.requestFocus();
         }//GEN-LAST:event_addButtonActionPerformed
 
         private void removeTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeTitleActionPerformed
@@ -242,8 +278,17 @@ public class Transaksi extends javax.swing.JFrame {
 		
 		harga = barang.getHarga();
 		qty = Integer.parseInt(itemValue.getText());		
-		JOptionPane.showMessageDialog(null, "Kode : " + codeValue.getText() + "\n" + "Daftar Belanja: \n" +barang.getNamaBarang()+ qty + " " + harga + "\n" + "Total " +penjualan.countSubtotal());
+		JOptionPane.showMessageDialog(null, "Kode : " + codeValue.getText() + "\n" + "Daftar Belanja: \n" + penjualan.countName()+ " " + "\n" + "Total " +penjualan.countSubtotal());
         }//GEN-LAST:event_SaveButtonActionPerformed
+
+        private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
+                // TODO add your handling code here:
+		
+		
+		codeValue.setText(null);
+		itemValue.setText(null);
+		tabel.setRowCount(0);
+        }//GEN-LAST:event_CancelButtonActionPerformed
 
 	/**
 	 * @param args the command line arguments
