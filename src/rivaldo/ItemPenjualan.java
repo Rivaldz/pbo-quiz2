@@ -17,8 +17,6 @@ public class ItemPenjualan { //class yang menangani jComboBox
 	getTabel().addColumn("Nama");
         getTabel().addColumn("Harga");
         getTabel().addColumn("Jumlah");
-        
-	
 	}
 	public double countSubtotal(){//menghitung total transaksi 
         double subTotal=0;
@@ -68,7 +66,9 @@ public class ItemPenjualan { //class yang menangani jComboBox
 	public void setTabel(DefaultTableModel tabel) {
 		this.tabel = tabel;
 	}
-	
+	public int getRowCount(){
+		return tabel.getRowCount();
+	}
 }
 	
 
