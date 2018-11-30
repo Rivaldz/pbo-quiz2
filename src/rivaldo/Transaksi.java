@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.crypto.Data;
 
@@ -54,8 +55,7 @@ public class Transaksi extends javax.swing.JFrame {
 	itemComboBox.addItem(item3);
 	//itemComboBox.addItem(item4);
     }
-		
-	
+
 
 	/**
 	 * This method is called from within the constructor to initialize the
@@ -248,23 +248,20 @@ public class Transaksi extends javax.swing.JFrame {
                 // TODO add your handling code here;
 		
 		String isi = itemValue.getText();//memanggil text yang ada di kolom itemvalue
-		if (isi.equals("")) {//cek apakah kolom sudah terisi 
-			JOptionPane.showMessageDialog(null, "masukan jumlah di kolom kiri Add","Mohon Perhatian", JOptionPane.WARNING_MESSAGE);
-		} else { 
-		
+		if (isi.equals("") || isi.equals("0")) {//cek apakah kolom sudah terisi 
+			JOptionPane.showMessageDialog(null, "Isi jumlah tidak boleh kosong atau 0","Mohon Perhatian", JOptionPane.WARNING_MESSAGE);
+		} else {	
 			removeTitle.setEnabled(enable);
 			tblBarang.setEnabled(enable);
 			SaveButton.setEnabled(enable);
 			CancelButton.setEnabled(enable);
-			
-			DefaultTableModel model =(DefaultTableModel)tblBarang.getModel();
-			
-			String[] data = new String[3];			
-			data[0]=barang.getNamaBarang();	//memasukan nama barang dari class item ke indek table 
-			data[1]=String.valueOf(barang.getHarga()); //memasukan harga barang dari class item ke indek table 
-			data[2]=itemValue.getText(); //memasukan jumlah item  dari class item ke indek table 
-			penjualan.getTabel().addRow(data); //memasukan semua index data ke table row 
-			
+
+				String[] data = new String[3];
+				DefaultTableModel model =(DefaultTableModel)tblBarang.getModel();		
+				data[0]=barang.getNamaBarang();	//memasukan nama barang dari class item ke indek table 
+				data[1]=String.valueOf(barang.getHarga()); //memasukan harga barang dari class item ke indek table 
+				data[2]=itemValue.getText(); //memasukan jumlah item  dari class item ke indek table 
+				penjualan.getTabel().addRow(data); //memasukan semua index data ke table row
 		}
         
         }//GEN-LAST:event_addButtonActionPerformed
@@ -278,12 +275,14 @@ public class Transaksi extends javax.swing.JFrame {
 
         private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
                 // TODO add your handling code he
+		if (penjualan.getRowCount() == 0 ) {
+			JOptionPane.showMessageDialog(this, "Tidak bisa save item belum di isi","",JOptionPane.WARNING_MESSAGE);
+		}else{
 		double harga, jumlah = 0 ;
 		int qty = 0 ;
 		
-		harga = barang.getHarga();  //menampilkan dan memanggil method perhitungan dan tampilan nama dari class itempenjualan 
-		qty = Integer.parseInt(itemValue.getText());		
-		JOptionPane.showMessageDialog(null, "Kode : " + codeValue.getText() + "\n" + "Daftar Belanja: \n" + "Nama Barang " +penjualan.showSave() + "\n" + "Total " +penjualan.countSubtotal());
+		harga = barang.getHarga();  //menampilkan dan memanggil method perhitungan dan tampilan nama dari class itempenjualan 	
+		JOptionPane.showMessageDialog(null, "Kode : " + codeValue.getText() + "\n" + "Daftar Belanja: \n" + "Nama Barang " +penjualan.showSave() + "\n" + "Total " + penjualan.countSubtotal());
 		DefaultTableModel model =(DefaultTableModel)tblBarang.getModel();
 		while (model.getRowCount() > 0) { //me set ulang tabel ke kosong setelah di save 
 			for (int j = 0; j < model.getRowCount(); j++) {
@@ -298,6 +297,7 @@ public class Transaksi extends javax.swing.JFrame {
 		itemValue.setEnabled(false);
 		newButton.setEnabled(enable);
 		codeValue.setEnabled(enable);
+	    }
         }//GEN-LAST:event_SaveButtonActionPerformed
 
         private void CancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelButtonActionPerformed
