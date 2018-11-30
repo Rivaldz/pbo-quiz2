@@ -1,49 +1,46 @@
 package rivaldo;
 
+import java.util.Objects;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author rivaldz
  */
-public class ItemPenjualan {
+public class ItemPenjualan { //class yang menangani jComboBox
 	private String nama;
 	private int jumlah ;
 	private float harga;
-	private DefaultTableModel tabel = new DefaultTableModel();
+	 DefaultTableModel tabel = new DefaultTableModel();
 	
-	public ItemPenjualan() {
+	public ItemPenjualan() { //mengisi nama row jComboBox 
 	getTabel().addColumn("Nama");
         getTabel().addColumn("Harga");
         getTabel().addColumn("Jumlah");
         
 	
 	}
-	public double countSubtotal(){
+	public double countSubtotal(){//menghitung total transaksi 
         double subTotal=0;
 	double penghitungan = 0;
         for (int i=0 ; i < tabel.getRowCount();i++){
 	    penghitungan = Double.parseDouble((String) tabel.getValueAt(i, 2));
             subTotal = subTotal + (penghitungan*Double.parseDouble(tabel.getValueAt(i, 1).toString()));
-        }
-        return subTotal;
-    }
-	public String countName(){
-		countSubtotal();
-		String str = "";
-		str += "Kode\t\t: "+ this.code +"\n";
-		str += "Daftar Belanja : \n";
-		for(Item item : ) {
-		str += "\t"+ item.getName() +"(x"+ item.getQty() +") : "+ item.getTotal() +"\n";
-        }
-        str += "Total\t\t: "+ this.total;
-        return str;
-	}
-
-	public String getNama() {
+            }
+           return subTotal;
+	 }
+	public String showSave(){//menampilkan apabila ada 2 jenis barang yang berbeda 
+		
+		String obt = "";
+		for(int j = 0 ;j < tabel.getRowCount(); j++){
+            obt += "\n" + tabel.getValueAt(j, 0) + "\t " + tabel.getValueAt(j, 2 ) + "\t " + tabel.getValueAt(j, 1);
+		}
+		return  obt ;
+	}	
+	
+	public String getNama() { //geter mendapatkan nilai 
 		return nama;
 	}
-
 	public void setNama(String nama) {
 		this.nama = nama;
 	}
@@ -72,8 +69,6 @@ public class ItemPenjualan {
 		this.tabel = tabel;
 	}
 	
-	
-
 }
 	
 
